@@ -1,10 +1,7 @@
 package penna.core.sink;
 
 import penna.core.minilog.MiniLogger;
-import penna.core.sink.impl.GsonPennaSink;
-import penna.core.sink.impl.JakartaPennaSink;
-import penna.core.sink.impl.JacksonPennaSink;
-import penna.core.sink.impl.NOPSink;
+import penna.core.sink.impl.*;
 
 import java.io.*;
 import java.util.function.Supplier;
@@ -17,6 +14,7 @@ public final class PennaSink {
     // The methods below are correctly typed.
     @SuppressWarnings("unchecked")
     private static final Supplier<Supplier<SinkImpl>>[] candidates = new Supplier[]{
+            PennaSink::tryNative,
             PennaSink::tryJackson,
             PennaSink::tryGson,
             PennaSink::tryJakarta
@@ -58,6 +56,9 @@ public final class PennaSink {
         return null;
     }
 
+    private static Supplier<SinkImpl> tryNative() {
+        return NativePennaSink::new;
+    }
 
     private static Supplier<SinkImpl> tryJackson() {
         try {

@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'org.example'
@@ -11,7 +12,7 @@ repositories {
 
 dependencies {
     implementation 'org.slf4j:slf4j-api:2.0.6'
-    runtimeOnly 'com.hkupty.penna:penna-core:0.4'
+    runtimeOnly project(":penna-core")
     runtimeOnly 'com.hkupty.penna:penna-yaml-config:0.4'
     runtimeOnly 'com.fasterxml.jackson.core:jackson-core:2.14.2'
     runtimeOnly 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
@@ -22,4 +23,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+application {
+    mainClass = 'org.example.Main'
 }

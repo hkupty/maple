@@ -8,7 +8,7 @@ public class Main {
         Logger logger = LoggerFactory.getLogger(Main.class);
         Logger otherLogger = LoggerFactory.getLogger("simple.logger");
 
-        logger.info("Hello world!");
+        logger.info("Hello world!", new RuntimeException("Something awful!"));
         logger.debug("This should be shown");
         otherLogger.info("Hello world!");
         otherLogger.debug("This should be not shown");

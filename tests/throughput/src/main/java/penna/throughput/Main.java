@@ -22,7 +22,7 @@ public class Main {
 
         for (int i = 0; i < threads; i++) {
             int finalI = i;
-            new Thread(() -> {
+            var thread = new Thread(() -> {
                 while (Instant.now().isBefore(target)) {
 
                     try {
@@ -38,7 +38,9 @@ public class Main {
                                 .log("Hello \n{}!", "world");
                     }
                 }
-            }).start();
+            });
+            thread.setName("penna-" + i);
+            thread.start();
         }
     }
 }
